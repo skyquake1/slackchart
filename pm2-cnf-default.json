@@ -1,0 +1,10 @@
+{
+  "apps":[
+    {
+      "name"              : "cba-ax-chart-slack-bot",
+      "script"            : "./index.js",
+      "cwd"               : "./",
+      "log_date_format"   : "YYYY-MM-DD HH:mm"
+    }
+  ]
+}

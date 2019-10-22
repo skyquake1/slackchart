@@ -1,0 +1,27 @@
+{
+  "name": "cba-ax-chart-slack-bot",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "author": "Nicholas Kravchenko",
+  "description": "Commonwealth Bank Of Australia (CBA) chart SlackBot",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skyquake1/slackchart.git"
+  },
+  "scripts": {
+    "app": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "node-phantom-simple": "^2.2.4",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0",
+    "webshot": "^0.18.0"
+  }
+}
