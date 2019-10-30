@@ -31,6 +31,10 @@
     > cp .env.example .env
     > nano .env
 ```
+7. install phantomjs
+```
+    > npm install phantomjs -g
+```
 Env variables:
 **HTTP_FRONT_PORT:** front http server port
 

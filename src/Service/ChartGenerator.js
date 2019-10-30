@@ -12,7 +12,8 @@ function ChartGenerator()
     const self = this;
     const file = `${moment().unix()}.png`;
     //const file = `./static/${moment().unix()}.jpg`;
-    const url = `https://tvc4.forexpros.com/95d6a9cc0ff8befa6108ab62f2caa1a5/1571638960/70/70/31/history?symbol=625&resolution=5&from=${moment().subtract(3, 'day').unix()}&to=${moment().unix()}`;
+    //const url = `https://tvc4.forexpros.com/95d6a9cc0ff8befa6108ab62f2caa1a5/1571638960/70/70/31/history?symbol=625&resolution=5&from=${moment().subtract(3, 'day').unix()}&to=${moment().unix()}`;
+    const url = `https://au.advfn.com/common/javascript/tradingview/advfn/history?symbol=ASX%5EXJO&resolution=5&from=${moment().subtract(3, 'day').unix()}&to=${moment().unix()}`;
     let chartData = {};
 
     this.init = function(){
@@ -29,7 +30,8 @@ function ChartGenerator()
                     };
                     let formatNow = moment().format('l');
 
-                    for (let i = body.t.length; i>=0; i--) {
+                    //for (let i = body.t.length; i>=0; i--) {
+                    for (let i = 0, с = body.t.length; i<с; i++) {
 
                         let date = moment.unix( body.t[i] );
                         let dateFormatted = date.format(  formatNow == date.format('l') ? 'LT' : 'MM/DD h:mm a'  );
