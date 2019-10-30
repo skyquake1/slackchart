@@ -1,6 +1,7 @@
 
 const axios = require('axios');
-const moment = require('moment');
+//const moment = require('moment');
+const moment = require('moment-timezone');
 const fs = require('fs');
 const phantom=require('node-phantom-simple');
 const AbstractService = require('./AbstractService');
@@ -11,9 +12,8 @@ function ChartGenerator()
 {
     const self = this;
     const file = `${moment().unix()}.png`;
-    //const file = `./static/${moment().unix()}.jpg`;
     //const url = `https://tvc4.forexpros.com/95d6a9cc0ff8befa6108ab62f2caa1a5/1571638960/70/70/31/history?symbol=625&resolution=5&from=${moment().subtract(3, 'day').unix()}&to=${moment().unix()}`;
-    const url = `https://au.advfn.com/common/javascript/tradingview/advfn/history?symbol=ASX%5EXJO&resolution=5&from=${moment().subtract(3, 'day').unix()}&to=${moment().unix()}`;
+    const url = `https://au.advfn.com/common/javascript/tradingview/advfn/history?symbol=ASX%5ECBA&resolution=5&v=1&from=${moment().startOf('day').subtract(1, 'hour').unix()}&to=${moment().add(1, 'day').tz('Australia/Sydney').unix()}`;
     let chartData = {};
 
     this.init = function(){
@@ -32,10 +32,12 @@ function ChartGenerator()
 
                     //for (let i = body.t.length; i>=0; i--) {
                     for (let i = 0, с = body.t.length; i<с; i++) {
-
                         let date = moment.unix( body.t[i] );
-                        let dateFormatted = date.format(  formatNow == date.format('l') ? 'LT' : 'MM/DD h:mm a'  );
+                        if (formatNow != date.tz('Australia/Sydney').format('l')) {
+                            continue;
+                        }
 
+                        let dateFormatted = date.tz('Australia/Sydney').format(  formatNow == date.format('l') ? 'LT' : 'MM/DD h:mm a'  );
                         chartData.dataCandlestick.unshift({
                             x: dateFormatted,
                             y: [body.o[i], body.h[i], body.l[i], body.c[i]]
@@ -90,8 +92,6 @@ function ChartGenerator()
     this.getImageUrl = function(){
         return process.env.HTTP_STATIC_URL+file;
     }
-
-
 }
 
 module.exports = ChartGenerator;
