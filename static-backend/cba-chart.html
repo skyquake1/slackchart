@@ -2,7 +2,8 @@
 <html lang="en">
 <head></head>
 <body style="background-color: #fff ">
-    <div style="width: 1536px; background-color: #fff ">
+    <!--<div style="width: 1536px; background-color: #fff ">-->
+    <div style="width: 2000px; background-color: #fff ">
         <div id="chartCandlestick"></div>
         <div id="chartBar"></div>
     </div>
@@ -38,9 +39,9 @@ window.initChart = function(body) {
             labels: {
                 trim: false,
                 hideOverlappingLabels: true,
-                formatter: function (value, timestamp, index) {
-                    return index && index%2 || !value ? '' : value.toUpperCase();
-                },
+//                formatter: function (value, timestamp, index) {
+//                    return index && index%2 || !value ? '' : value.toUpperCase();
+//                },
             }
         },
         yaxis: {
