@@ -28,8 +28,8 @@ function ChartGenerator(code)
                         code: code,
                         dataCandlestick: [],
                         dataBar: [],
-                        min:Math.min(...[Math.min(...body.o), Math.min(...body.h), Math.min(...body.l), Math.min(...body.c)]),
-                        max:Math.max(...[Math.min(...body.o), Math.max(...body.h), Math.max(...body.l), Math.max(...body.c)]),
+                        min:0,
+                        max:0,
                         prevDay:{ts:0},
                     };
                     let formatNow = moment().format('l');
@@ -48,6 +48,17 @@ function ChartGenerator(code)
                                };
                            }
                             continue;
+                        }
+
+                        const min = Math.min(...[body.o[i], body.h[i], body.l[i], body.c[i]]);
+                        const max = Math.max(...[body.o[i], body.h[i], body.l[i], body.c[i]]);
+
+                        if (chartData.min > min || !chartData.min) {
+                            chartData.min = min
+                        }
+
+                        if (chartData.max < max) {
+                            chartData.max = max
                         }
 
                         let dateFormattedX = dateFormatted.indexOf(':00')>=0 || dateFormatted.indexOf(':30')>=0 ? dateFormatted.toUpperCase() : '';

@@ -13,6 +13,8 @@
 <script>
 
 window.initChart = function(body) {
+    const range = 7*(body.max-body.min)/100;
+
     const optionsCandlestick = {
         chart: {
             height: 750,
@@ -63,8 +65,10 @@ window.initChart = function(body) {
             tooltip: {
                 enabled: true
             },
-            min: body.min-0.05,
-            max: body.max+0.05,
+            min: body.min-range,
+            max: body.max+range,
+//            min: body.min,
+//            max: body.max,
             labels: {
                 formatter: function (value, timestamp, index) {
                     return parseInt(value * 100) / 100;
