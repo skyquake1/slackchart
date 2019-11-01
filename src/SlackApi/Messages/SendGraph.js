@@ -12,7 +12,7 @@ function Report(chart, params)
 {
     const self = this;
 
-    this.send = function()
+    this.send = function(chartData)
     {
         return self.chatPostMessage({
             text: `Chart: ${params.text.toUpperCase()}`,
@@ -21,6 +21,7 @@ function Report(chart, params)
         }, [{
             "title": "",
             "text": "",
+            "footer": 'Closed: ' + chartData.prevDay.date + ' $'+ chartData.prevDay.price,
             "image_url": chart.getImageUrl(),
         }]);
     }

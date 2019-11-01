@@ -18,6 +18,7 @@ window.initChart = function(body) {
             height: 750,
             type: 'candlestick',
             toolbar: {show: false},
+            background: '#fff',
             animations: {
                 enabled: false
             }
@@ -32,8 +33,12 @@ window.initChart = function(body) {
         },
         series: [],
         title: {
-            text: body.code || '',
-            align: 'left'
+            text: body.code,
+            align: 'left',
+            style: {
+                fontSize:  '20px',
+                color:  '#9699a2'
+            },
         },
         xaxis: {
             type: 'category',
@@ -74,11 +79,14 @@ window.initChart = function(body) {
         },
         grid:{
             show: true,
+            borderColor: '#000',
             row: {
-                colors: ['#111', '#111', '#111']
+                colors: ['#fff', '#000'],
+                opacity: 0.05
             },
             column: {
-                colors: ['#111', '#111', '#111']
+                colors: ['#fff', '#000'],
+                opacity: 0.05
             },
         }
     };
@@ -104,8 +112,11 @@ window.initChart = function(body) {
             labels: {
                 trim: false,
                 hideOverlappingLabels: true,
-                formatter: function (value, timestamp, index) {
-                    return index%4 || !value ? '' : value.toUpperCase();
+                style: {
+                    colors: [],
+                    fontSize: '20px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    cssClass: 'apexcharts-xaxis-label',
                 },
             },
         },
@@ -116,8 +127,26 @@ window.initChart = function(body) {
             labels: {
                 formatter: function (value, timestamp, index) {
                     return (value / 1000000) + "M";
-                }
+                },
+                style: {
+                    colors: [],
+                    fontSize: '20px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    cssClass: 'apexcharts-xaxis-label',
+                },
             }
+        },
+        grid:{
+            show: true,
+            borderColor: '#000',
+            row: {
+                colors: ['#fff', '#000'],
+                opacity: 0.05
+            },
+            column: {
+                colors: ['#fff', '#000'],
+                opacity: 0.05
+            },
         }
     };
 
@@ -128,12 +157,12 @@ window.initChart = function(body) {
             document.querySelector("#chartCandlestick"),
             optionsCandlestick
     );
-//    const chartBar = new ApexCharts(
-//            document.querySelector("#chartBar"),
-//            optionsBar
-//    );
+    const chartBar = new ApexCharts(
+            document.querySelector("#chartBar"),
+            optionsBar
+    );
     chartCandlestick.render();
-//    chartBar.render();
+    chartBar.render();
 }
 
 //test data
