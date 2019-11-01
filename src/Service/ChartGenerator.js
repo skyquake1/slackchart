@@ -30,7 +30,7 @@ function ChartGenerator(code)
                         dataBar: [],
                         min:Math.min(...[Math.min(...body.o), Math.min(...body.h), Math.min(...body.l), Math.min(...body.c)]),
                         max:Math.max(...[Math.min(...body.o), Math.max(...body.h), Math.max(...body.l), Math.max(...body.c)]),
-                        prevDay:{},
+                        prevDay:{ts:0},
                     };
                     let formatNow = moment().format('l');
 
@@ -40,10 +40,13 @@ function ChartGenerator(code)
                         let dateFormatted = date.tz('Australia/Sydney').format(  formatNow == date.format('l') ? 'LT' : 'MM/DD h:mm a'  );
 
                         if (formatNow != date.tz('Australia/Sydney').subtract(1, 'hour').format('l')) {
-                            chartData.prevDay = {
-                                date:dateFormatted,
-                                price:body.c[i],
-                            };
+                           if (chartData.prevDay.ts < body.t[i]) {
+                               chartData.prevDay = {
+                                   date:dateFormatted,
+                                   price:body.c[i],
+                                   ts:body.t[i]
+                               };
+                           }
                             continue;
                         }
 
