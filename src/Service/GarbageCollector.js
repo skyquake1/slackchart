@@ -18,7 +18,7 @@ const ignore = {
 function GarbageCollector()
 {
     function clearImages(){
-        const date = moment().subtract(1, 'months').valueOf();
+        const date = moment().subtract(14, 'day').valueOf();
         fs.readdirSync(process.env.HTTP_STATIC_PATH).forEach(file => {
             if (!ignore[file]) {
                 const filePath = process.env.HTTP_STATIC_PATH + file;

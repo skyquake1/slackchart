@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head></head>
-<body style="background-color: #fff ">
+<body style="background-color: #fff;">
     <!--<div style="width: 1536px; background-color: #fff ">-->
-    <div style="width: 2000px; background-color: #fff ">
+    <!--<div style="width: 1000px; height: 780px; background-color: #fff; ">-->
+    <div style="width: 1000px; background-color: #fff; ">
         <div id="chartCandlestick"></div>
         <div id="chartBar"></div>
     </div>
@@ -38,10 +39,19 @@ window.initChart = function(body) {
             type: 'category',
             labels: {
                 trim: false,
-                hideOverlappingLabels: true,
-//                formatter: function (value, timestamp, index) {
-//                    return index && index%2 || !value ? '' : value.toUpperCase();
-//                },
+                rotate: -45,
+                rotateAlways: true,
+                //hideOverlappingLabels: true,
+                //formatter: function (value, timestamp, index) {
+                ////      return index && index%2 || !value ? '' : value.toUpperCase();
+                //    return  value.indexOf(':00')>=0 || value.indexOf(':30')>=0 ? value.toUpperCase() : '';
+                //},
+                style: {
+                    colors: [],
+                    fontSize: '20px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    cssClass: 'apexcharts-xaxis-label',
+                },
             }
         },
         yaxis: {
@@ -52,8 +62,14 @@ window.initChart = function(body) {
             max: body.max+0.05,
             labels: {
                 formatter: function (value, timestamp, index) {
-                    return parseInt(value * 10) / 10;
-                }
+                    return parseInt(value * 100) / 100;
+                },
+                style: {
+                    colors: [],
+                    fontSize: '20px',
+                    fontFamily: 'Helvetica, Arial, sans-serif',
+                    cssClass: 'apexcharts-xaxis-label',
+                },
             }
         },
         grid:{
@@ -118,8 +134,12 @@ window.initChart = function(body) {
 //    );
     chartCandlestick.render();
 //    chartBar.render();
-
 }
+
+//test data
+//initChart({"dataCandlestick":[{"x":"10:00 AM","y":[2.56,2.56,2.56,2.56]},{"x":"10:05 AM","y":[2.54,2.54,2.52,2.525]},{"x":"10:10 AM","y":[2.525,2.535,2.51,2.515]},{"x":"10:15 AM","y":[2.51,2.52,2.51,2.51]},{"x":"10:20 AM","y":[2.51,2.515,2.51,2.51]},{"x":"10:25 AM","y":[2.51,2.515,2.51,2.51]},{"x":"10:30 AM","y":[2.51,2.515,2.505,2.505]},{"x":"10:35 AM","y":[2.505,2.51,2.5,2.505]},{"x":"10:40 AM","y":[2.51,2.51,2.51,2.51]},{"x":"10:45 AM","y":[2.51,2.515,2.51,2.51]},{"x":"10:50 AM","y":[2.51,2.51,2.51,2.51]},{"x":"10:55 AM","y":[2.515,2.515,2.505,2.51]},{"x":"11:00 AM","y":[2.51,2.51,2.51,2.51]},{"x":"11:05 AM","y":[2.51,2.51,2.505,2.505]},{"x":"11:10 AM","y":[2.505,2.51,2.505,2.51]},{"x":"11:15 AM","y":[2.505,2.51,2.49,2.5]},{"x":"11:20 AM","y":[2.5,2.5,2.49,2.49]},{"x":"11:25 AM","y":[2.5,2.5,2.49,2.5]}],"dataBar":[{"x":"10:00 AM","y":0},{"x":"10:05 AM","y":451179},{"x":"10:10 AM","y":327882},{"x":"10:15 AM","y":617396},{"x":"10:20 AM","y":48039},{"x":"10:25 AM","y":11242},{"x":"10:30 AM","y":355814},{"x":"10:35 AM","y":108113},{"x":"10:40 AM","y":886},{"x":"10:45 AM","y":106386},{"x":"10:50 AM","y":70},{"x":"10:55 AM","y":346143},{"x":"11:00 AM","y":111172},{"x":"11:05 AM","y":90103},{"x":"11:10 AM","y":14769},{"x":"11:15 AM","y":796069},{"x":"11:20 AM","y":170192},{"x":"11:25 AM","y":24692}],"min":2.49,"max":2.57})
+
+
 </script>
 </body>
 </html>

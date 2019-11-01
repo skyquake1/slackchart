@@ -8,12 +8,14 @@ const AbstractService = require('./AbstractService');
 
 ChartGenerator.prototype = new AbstractService();
 
-function ChartGenerator()
+function ChartGenerator(code)
 {
+    code = (code || '').toUpperCase();
     const self = this;
     const file = `${moment().unix()}.png`;
     //const url = `https://tvc4.forexpros.com/95d6a9cc0ff8befa6108ab62f2caa1a5/1571638960/70/70/31/history?symbol=625&resolution=5&from=${moment().subtract(3, 'day').unix()}&to=${moment().unix()}`;
-    const url = `https://au.advfn.com/common/javascript/tradingview/advfn/history?symbol=ASX%5ECBA&resolution=5&v=1&from=${moment().startOf('day').subtract(1, 'hour').unix()}&to=${moment().add(1, 'day').tz('Australia/Sydney').unix()}`;
+    //const url = `https://au.advfn.com/common/javascript/tradingview/advfn/history?symbol=ASX%5ECBA&resolution=5&v=1&from=${moment().startOf('day').subtract(1, 'hour').unix()}&to=${moment().add(1, 'day').tz('Australia/Sydney').unix()}`;
+    const url = `https://au.advfn.com/common/javascript/tradingview/advfn/history?symbol=ASX%5E${code}&resolution=5&v=1&from=${moment().startOf('day').subtract(1, 'hour').unix()}&to=${moment().add(1, 'day').tz('Australia/Sydney').unix()}`;
     let chartData = {};
 
     this.init = function(){
@@ -39,7 +41,8 @@ function ChartGenerator()
 
                         let dateFormatted = date.tz('Australia/Sydney').format(  formatNow == date.format('l') ? 'LT' : 'MM/DD h:mm a'  );
                         chartData.dataCandlestick.unshift({
-                            x: dateFormatted,
+                            //x: dateFormatted,
+                            x: dateFormatted.indexOf(':00')>=0 || dateFormatted.indexOf(':30')>=0 ? dateFormatted.toUpperCase() : '',
                             y: [body.o[i], body.h[i], body.l[i], body.c[i]]
                         });
 
@@ -84,7 +87,8 @@ function ChartGenerator()
                 });
             })
             .catch(function(err){
-                reject({text:'forexpros.com Error', err:err});
+                //reject({text:'forexpros.com Error', err:err});
+                reject();
             });
         });
     };
