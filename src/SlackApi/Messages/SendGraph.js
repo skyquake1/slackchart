@@ -15,7 +15,7 @@ function Report(chart, params)
     this.send = function()
     {
         return self.chatPostMessage({
-            text:  params.code,
+            text: `Chart: ${params.text.toUpperCase()}`,
             as_user:  false,
             "channel": params.channel_id,
         }, [{
