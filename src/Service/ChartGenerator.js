@@ -25,6 +25,7 @@ function ChartGenerator(code)
                     const body = data.data;
 
                     let chartData = {
+                        code: code,
                         dataCandlestick: [],
                         dataBar: [],
                         min:Math.min(...[Math.min(...body.o), Math.min(...body.h), Math.min(...body.l), Math.min(...body.c)]),

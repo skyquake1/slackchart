@@ -8,15 +8,16 @@ Report.prototype = new AbstractSlackApiMessages();
  * reportData
  * @constructor
  */
-function Report(chart, channel)
+function Report(chart, params)
 {
     const self = this;
 
     this.send = function()
     {
         return self.chatPostMessage({
-            text:  'Commonwealth Bank Of Australia',
-            "channel": channel,
+            text:  params.code,
+            as_user:  false,
+            "channel": params.channel_id,
         }, [{
             "title": "",
             "text": "",
