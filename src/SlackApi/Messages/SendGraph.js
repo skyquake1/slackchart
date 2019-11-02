@@ -21,7 +21,7 @@ function Report(chart, params)
         }, [{
             "title": "",
             "text": "",
-            "footer": 'Closed: ' + chartData.prevDay.date + ' $'+ chartData.prevDay.price,
+            //"footer": 'Closed: ' + chartData.prevDay.date + ' $'+ chartData.prevDay.price,
             "image_url": chart.getImageUrl(),
         }]);
     }

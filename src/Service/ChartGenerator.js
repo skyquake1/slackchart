@@ -15,7 +15,7 @@ function ChartGenerator(code)
     const file = `${moment().unix()}.png`;
     //const url = `https://tvc4.forexpros.com/95d6a9cc0ff8befa6108ab62f2caa1a5/1571638960/70/70/31/history?symbol=625&resolution=5&from=${moment().subtract(3, 'day').unix()}&to=${moment().unix()}`;
     //const url = `https://au.advfn.com/common/javascript/tradingview/advfn/history?symbol=ASX%5E${code}&resolution=5&v=1&from=${moment().startOf('day').subtract(1, 'hour').unix()}&to=${moment().add(1, 'day').tz('Australia/Sydney').unix()}`;
-    const url = `https://au.advfn.com/common/javascript/tradingview/advfn/history?symbol=ASX%5E${code}&resolution=5&v=1&from=${moment().subtract(3, 'day').unix()}&to=${moment().add(1, 'day').tz('Australia/Sydney').unix()}`;
+    const url = `https://au.advfn.com/common/javascript/tradingview/advfn/history?symbol=ASX%5E${code}&resolution=5&v=1&from=${moment().subtract(2, 'day').unix()}&to=${moment().add(1, 'day').tz('Australia/Sydney').unix()}`;
     let chartData = {};
 
     this.init = function(){
