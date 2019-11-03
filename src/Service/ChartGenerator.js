@@ -75,6 +75,17 @@ function ChartGenerator(code)
                         })
                     }
 
+                for (let i = 0; i<=5; i++) {
+                    chartData.dataCandlestick.unshift({
+                        x: '',
+                        y: [0,0,0,0]
+                    });
+                    chartData.dataBar.unshift({
+                        x: '',
+                        y: 0
+                    })
+                }
+
                 phantom.create(function(err,ph) {
                     if (err) {
                         reject({text:'Phantom Create Error', err:err});

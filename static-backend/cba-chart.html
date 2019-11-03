@@ -47,6 +47,7 @@ window.initChart = function(body) {
             labels: {
                 trim: false,
                 rotate: -45,
+//                rotate: -90,
                 rotateAlways: true,
                 //hideOverlappingLabels: true,
                 //formatter: function (value, timestamp, index) {
@@ -63,21 +64,25 @@ window.initChart = function(body) {
         },
         yaxis: {
             tooltip: {
-                enabled: true
+                enabled: false
             },
             min: body.min-range,
             max: body.max+range,
-//            min: body.min,
-//            max: body.max,
+            align: 'left',
+//            opposite: true,
             labels: {
                 formatter: function (value, timestamp, index) {
                     return parseInt(value * 100) / 100;
                 },
+//                offsetX: 55,
+                offsetX: 75,
+                offsetY: -5,
+
                 style: {
                     colors: [],
                     fontSize: '20px',
                     fontFamily: 'Helvetica, Arial, sans-serif',
-                    cssClass: 'apexcharts-xaxis-label',
+                    cssClass: 'apexcharts-yaxis-label',
                 },
             }
         },
@@ -115,6 +120,8 @@ window.initChart = function(body) {
             type: 'category',
             labels: {
                 trim: false,
+//                rotate: -90,
+                rotate: -45,
                 hideOverlappingLabels: true,
                 style: {
                     colors: [],
@@ -126,17 +133,40 @@ window.initChart = function(body) {
         },
         yaxis: {
             tooltip: {
-                enabled: true
+                enabled: false
             },
+//            opposite: true,
+            align: 'left',
             labels: {
+                show: true,
+//                offsetX: 55,
+                offsetX: 75,
+                offsetY: -5,
                 formatter: function (value, timestamp, index) {
-                    return (value / 1000000) + "M";
+                    var reduction = 1;
+                    var abbr = '';
+
+                    switch (true) {
+                        case value>=100 && value<100000:
+                            reduction = 1000;
+                            abbr = 'k';
+                            break;
+                        case value>=100000 && value<100000000:
+                            reduction = 1000000;
+                            abbr = 'M';
+                            break;
+                        case value>=100000000:
+                            reduction = 1000000000;
+                            abbr = 'G';
+                            break;
+                    }
+                    return  (parseInt((value / reduction)*10)/10) + abbr;
                 },
                 style: {
                     colors: [],
                     fontSize: '20px',
                     fontFamily: 'Helvetica, Arial, sans-serif',
-                    cssClass: 'apexcharts-xaxis-label',
+                    cssClass: 'apexcharts-yaxis-label',
                 },
             }
         },
