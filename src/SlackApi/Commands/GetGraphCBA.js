@@ -15,6 +15,10 @@ function GetGraphCBA(params)
         return new Promise(function(resolve, reject) {
             let chart = new self.cl.Service.ChartGenerator(params.text);
             chart.init().then(function(chartData){
+                if (chartData.msg) {
+                    resolve(chartData.msg);
+                    return null;
+                }
                 new self.cl.SlackApi.Messages.SendGraph(chart, params).send(chartData);
                 resolve('');
             }, function(){
