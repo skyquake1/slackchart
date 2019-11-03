@@ -21,8 +21,11 @@ function ChartGenerator(code)
     this.init = function(){
         return new Promise(function(resolve, reject) {
             axios.get(url).then(function(data) {
-
                     const body = data.data;
+                    if ('no_data' == body.s) {
+                        resolve({msg:"Data doesn't exists"});
+                        return null;
+                    }
 
                     let chartData = {
                         code: code,
@@ -40,13 +43,13 @@ function ChartGenerator(code)
                         let dateFormatted = date.tz('Australia/Sydney').format(  formatNow == date.format('l') ? 'LT' : 'MM/DD h:mm a'  );
 
                         if (formatNow != date.tz('Australia/Sydney').subtract(1, 'hour').format('l')) {
-                           if (chartData.prevDay.ts < body.t[i]) {
-                               chartData.prevDay = {
-                                   date:dateFormatted,
-                                   price:body.c[i],
-                                   ts:body.t[i]
-                               };
-                           }
+                            if (chartData.prevDay.ts < body.t[i]) {
+                                chartData.prevDay = {
+                                    date:dateFormatted,
+                                    price:body.c[i],
+                                    ts:body.t[i]
+                                };
+                            }
                             continue;
                         }
 
