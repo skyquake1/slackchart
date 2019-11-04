@@ -66,6 +66,7 @@ window.initChart = function(body) {
             tooltip: {
                 enabled: false
             },
+            floating: true,
             min: body.min-range,
             max: body.max+range,
             align: 'left',
@@ -135,11 +136,11 @@ window.initChart = function(body) {
             tooltip: {
                 enabled: false
             },
+            floating: true,
 //            opposite: true,
-            align: 'left',
+//            align: 'left',
             labels: {
                 show: true,
-//                offsetX: 55,
                 offsetX: 75,
                 offsetY: -5,
                 formatter: function (value, timestamp, index) {
@@ -204,5 +205,10 @@ window.initChart = function(body) {
 
 
 </script>
+
+<style>
+</style>
+
+
 </body>
 </html>
