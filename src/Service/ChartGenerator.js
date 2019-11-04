@@ -35,11 +35,12 @@ function ChartGenerator(code)
                         max:0,
                         prevDay:{ts:0},
                     };
-                    let formatNow = moment().format('l');
+                    //let formatNow = moment().format('l');
+                    let formatNow = moment().tz('Australia/Sydney').format('l');
 
                     //for (let i = body.t.length; i>=0; i--) {
                     for (let i = 0, с = body.t.length; i<с; i++) {
-                        let date = moment.unix( body.t[i] );
+                        let date = moment.unix( body.t[i] ).tz('Australia/Sydney');
                         let dateFormatted = date.tz('Australia/Sydney').format(  formatNow == date.format('l') ? 'LT' : 'MM/DD h:mm a'  );
 
                         if (formatNow != date.tz('Australia/Sydney').subtract(1, 'hour').format('l')) {
