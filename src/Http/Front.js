@@ -53,12 +53,36 @@ function Front(app)
         self.ok(res, response);
     }
 
+
+    /**
+     * getGraph webhook processor
+     * @param req
+     * @param res
+     */
+    async function getGraphWeb(req, res){
+        let response = ' ';
+        try {
+            const commandsProcessor = new self.cl.SlackApi.Commands.GetGraphCBA({
+                channel_id: req.query.channel_id,
+                text: req.query.code,
+            });
+            response = await commandsProcessor.run();
+        } catch (err){
+            self.log.error('Action Error', err);
+            self.err(res, 'Action Error', 400);
+            return null;
+        }
+
+        self.ok(res, response);
+    }
+
     /**
      * initiation Front HTTP server routes
      */
     this.init = function() {
         app.get('/', defaultRoute);
         app.post('/commands/:type', urlencodedParser, commands);
+        app.get('/webhook/get-graph', getGraphWeb);
         app.use('/static', express.static('static/'));
     };
 }
