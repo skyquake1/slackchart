@@ -21,8 +21,9 @@ function GetGraphCBA(params)
                 }
                 new self.cl.SlackApi.Messages.SendGraph(chart, params).send(chartData);
                 resolve('');
-            }, function(){
+            }, function(err){
                 resolve('oOops or something went wrong!');
+                console.error('err', err)
             });
         });
     };
